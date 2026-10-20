@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surprise Piano Lessons</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#111;color:#fff}
+.wrap{max-width:980px;margin:auto;padding:32px 22px 48px}
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:54px 32px;min-height:520px;display:flex;align-items:center;background-image:linear-gradient(90deg,rgba(8,8,8,.96) 0%,rgba(8,8,8,.88) 38%,rgba(8,8,8,.34) 72%,rgba(8,8,8,.12) 100%),url('piano-hero.jpg');background-size:cover;background-position:center right;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.hero-content{max-width:500px;position:relative;z-index:1}
+.gold{color:#f2b51d}.btn{display:inline-block;background:#f2b51d;color:#111;padding:15px 22px;border-radius:12px;text-decoration:none;font-weight:700;margin:8px 8px 8px 0}.btn.alt{background:transparent;color:#fff;border:2px solid #f2b51d}.btn.whatsapp{background:#25D366;color:#08110b}.btn.call{background:#fff;color:#111;border:2px solid #fff}
+h1{font-size:clamp(42px,8vw,72px);line-height:.98;margin:10px 0 20px}p{line-height:1.6}.card{margin-top:22px;padding:25px;background:#1d1d1d;border-radius:18px}input,select,textarea{box-sizing:border-box;width:100%;padding:12px;margin:7px 0 14px;border-radius:8px;border:0}button{background:#f2b51d;border:0;padding:14px 20px;border-radius:10px;font-weight:bold;cursor:pointer}
+@media(max-width:650px){.wrap{padding:16px 12px 32px}.hero{min-height:600px;padding:34px 22px;align-items:flex-end;background-image:linear-gradient(180deg,rgba(8,8,8,.18) 0%,rgba(8,8,8,.55) 42%,rgba(8,8,8,.96) 76%),url('piano-hero.jpg');background-position:58% center}.hero-content{max-width:none}.btn{display:block;text-align:center;margin-right:0}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero">
+<div class="hero-content">
+<p class="gold"><b>PLAY TODAY. INSPIRE TOMORROW.</b></p>
+<h1><span class="gold">Surprise</span><br>Piano Lessons</h1>
+<p>Customized piano lessons for children, teens, and adults — from beginner to advanced. Learn online or in person.</p>
+<p><b>$30 per hour · $50 registration fee</b></p>
+<a class="btn" href="#register">Register for Lessons</a>
+<a class="btn alt" href="https://buy.stripe.com/14A8wPcvY64W71PfqNd3i03">Pay Now</a>
+<a class="btn" href="https://buy.stripe.com/9B6dR98fI8d43PD1zXd3i04">Donate</a>
+<a class="btn whatsapp" href="https://wa.me/12408604218" target="_blank" rel="noopener" aria-label="Contact Surprise Piano Lessons on WhatsApp">💬 WhatsApp</a>
+<a class="btn call" href="tel:+12408604218" aria-label="Call Surprise Piano Lessons at 240-860-4218">📞 Call Now</a>
+</div>
+</section>
+<section class="card" id="register">
+<h2>Register for Lessons</h2>
+<form action="https://formsubmit.co/ljeanbouphard@gmail.com" method="POST">
+<label>Full Name</label><input name="name" required>
+<label>Email</label><input type="email" name="email" required>
+<label>Phone</label><input name="phone">
+<label>Lesson Type</label>
+<select name="lesson_type"><option>Online</option><option>In Person</option></select>
+<label>Message</label><textarea name="message" rows="4"></textarea>
+<button type="submit">Submit Registration</button>
+</form>
+
+</section>
+</main></body></html>
