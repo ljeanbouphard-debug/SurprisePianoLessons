@@ -41,7 +41,9 @@ export default async (request) => {
       "metadata[student_name]": name,
       "metadata[student_phone]": phone,
       "metadata[lesson_type]": lessonType,
-      "metadata[student_message]": message.slice(0, 500)
+      "metadata[student_message]": message.slice(0, 500),
+"metadata[registration_type]": "surprise_piano_registration",
+"metadata[registration_price_id]": priceId
     });
 
     const response = await fetch(`${STRIPE_API}/checkout/sessions`, {
