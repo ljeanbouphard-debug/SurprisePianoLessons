@@ -39,12 +39,69 @@ a {
 <body>
 <div class="card">
   <h1>Surprise Piano Lessons 🎹</h1>
-  <h2>Payment Verification</h2>
-  <p>Thank you for submitting your registration.</p>
-  <p>Your payment status has not yet been verified.</p>
-  <p>Your registration will be confirmed
-  once your payment is successfully verified.</p>
+  
+  <h2 id="paymentTitle">Verifying Payment...</h2>
+
+  <p id="paymentMessage">
+    Please wait while we securely verify your
+    registration payment with Stripe.
+  </p>
+
   <a href="/">Return to Home</a>
 </div>
+
+<script>
+async function verifyRegistrationPayment() {
+  const title = document.getElementById("paymentTitle");
+  const message = document.getElementById("paymentMessage");
+
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get("session_id");
+
+  if (!sessionId) {
+    title.textContent = "Payment Not Verified";
+    message.textContent =
+      "No checkout session was found. Please contact us if you completed a payment.";
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      "/api/verify-registration-payment?session_id=" +
+      encodeURIComponent(sessionId),
+      { cache: "no-store" }
+    );
+
+    if (!response.ok) {
+      throw new Error("Verification unavailable");
+    }
+
+    const result = await response.json();
+
+    if (result.paid === true) {
+      title.textContent = "Payment Successful!";
+      title.style.color = "#4ade80";
+
+      message.textContent =
+        "Your $50 registration payment has been verified. Thank you for choosing Surprise Piano Lessons!";
+    } else {
+      title.textContent = "Payment Pending";
+
+      message.textContent =
+        "Your payment has not yet been confirmed. Please check again later or contact us for assistance.";
+    }
+
+  } catch (error) {
+    title.textContent = "Verification Unavailable";
+
+    message.textContent =
+      "We could not verify your payment right now. Please contact us if you have already paid.";
+  }
+}
+
+verifyRegistrationPayment();
+</script>
+
 </body>
 </html>
+
