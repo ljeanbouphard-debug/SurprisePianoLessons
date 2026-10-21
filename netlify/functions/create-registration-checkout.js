@@ -55,9 +55,16 @@ export default async (request) => {
 
     const session = await response.json();
 
-    if (!response.ok || !session.url) {
-      throw new Error("Unable to create Stripe checkout");
-    }
+   if (!response.ok || !session.url) {
+  console.error("Stripe checkout failed:", {
+    status: response.status,
+    type: session.error?.type || "unknown",
+    code: session.error?.code || "unknown",
+    message: session.error?.message || "No error message"
+  });
+
+  throw new Error("Unable to create Stripe checkout");
+} 
 
     return Response.json({ url: session.url });
   } catch (error) {
