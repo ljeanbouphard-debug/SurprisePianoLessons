@@ -31,17 +31,68 @@ h1{font-size:clamp(42px,8vw,72px);line-height:.98;margin:10px 0 20px}p{line-heig
 </section>
 <section class="card" id="register">
 <h2>Register for Lessons</h2>
-<form action="https://formsubmit.co/ljeanbouphard@gmail.com" method="POST">
-  <input type="hidden" name="_next"
-value="https://surprisepianolessons.com/thank-you.html">
+<form id="registrationForm">
 <label>Full Name</label><input name="name" required>
 <label>Email</label><input type="email" name="email" required>
 <label>Phone</label><input name="phone">
 <label>Lesson Type</label>
 <select name="lesson_type"><option>Online</option><option>In Person</option></select>
 <label>Message</label><textarea name="message" rows="4"></textarea>
-<button type="submit">Submit Registration</button>
+<button type="submit">Register &amp; Pay $50</button>
 </form>
 
 </section>
-</main></body></html>
+</main>
+
+<script>
+const registrationForm =
+  document.getElementById("registrationForm");
+
+registrationForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const button =
+    registrationForm.querySelector('button[type="submit"]');
+
+  button.disabled = true;
+  button.textContent = "Connecting to secure payment...";
+
+  try {
+    const formData = new FormData(registrationForm);
+    const student = Object.fromEntries(formData.entries());
+
+    const response = await fetch(
+      "/api/create-registration-checkout",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(student)
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok || !result.url) {
+      throw new Error(
+        result.error || "Unable to start payment."
+      );
+    }
+
+    window.location.assign(result.url);
+
+  } catch (error) {
+    alert(
+      "We could not start your registration payment. " +
+      "Please try again."
+    );
+
+    button.disabled = false;
+    button.textContent = "Register & Pay $50";
+  }
+});
+</script>
+
+</body>
+</html>
